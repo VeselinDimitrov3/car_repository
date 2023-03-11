@@ -36,8 +36,6 @@ public class Users implements UserDetails {
     @Column
     private String password;
 
-    private String token;
-
 
     @Override
     public boolean equals(Object o) {

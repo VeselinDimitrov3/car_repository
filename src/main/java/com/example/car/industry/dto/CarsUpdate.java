@@ -1,6 +1,7 @@
 package com.example.car.industry.dto;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,27 +17,16 @@ public class CarsUpdate {
     private Long id;
 
     @NotNull
-    private String brand;
-
-    @NotNull
     private String newBrand;
-
-    @NotNull
-    private String model;
 
     @NotNull
     private String newModel;
 
     @NotNull
-    private Double pricePerDay;
-
-    @NotNull
-    private Double newPrice;
+    @Pattern(regexp = "(\\d+(\\.\\d*)?)", message = "Price for day must be decimal")
+    private String newPrice;
 
     @NotNull
     private int seats;
-
-    @NotNull
-    private int newSeats;
 
 }

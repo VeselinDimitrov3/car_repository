@@ -10,7 +10,7 @@ public class CarResponse {
     private Long id;
     private String brand;
     private String model;
-    private Double pricePerDay;
+    private String pricePerDay;
     private int seats;
 
 }

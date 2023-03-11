@@ -24,7 +24,7 @@ public class Cars {
     @Column
     private String model;
     @Column
-    private Double pricePerDay;
+    private String pricePerDay;
     @Column
     private int seats;
 

@@ -10,14 +10,14 @@ import java.util.Optional;
 @Component
 public class CarsConvertor {
 
-//    public Cars carsRequest (CarRequest carRequest) {
-//        return Cars.builder()
-//                .brand(carRequest.getBrand())
-//                .model(carRequest.getModel())
-//                .pricePerDay(carRequest.getPricePerDay())
-//                .seats(carRequest.getSeats())
-//                .build();
-//    }
+    public Cars carsRequest (CarRequest carRequest) {
+        return Cars.builder()
+                .brand(carRequest.getBrand())
+                .model(carRequest.getModel())
+                .pricePerDay(carRequest.getPricePerDay())
+                .seats(carRequest.getSeats())
+                .build();
+    }
 
     public CarResponse responseCar (Cars cars) {
         return CarResponse.builder()

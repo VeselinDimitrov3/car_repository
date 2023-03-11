@@ -3,7 +3,7 @@ package com.example.car.industry.controller;
 import com.example.car.industry.dto.*;
 import com.example.car.industry.entity.Reservation;
 import com.example.car.industry.entity.Users;
-import com.example.car.industry.service.CarService;
+import com.example.car.industry.exception.RecordNotFoundException;
 import com.example.car.industry.service.ReservationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,31 +34,31 @@ public class ReservationController {
     }
 
     @GetMapping(path = "/user/{id}")
-    ResponseEntity<ReservationResponse> findByUser(@PathVariable Users user) {
+    ResponseEntity<Reservation> findByUser(@PathVariable Users user) {
         return ResponseEntity
                 .status(HttpStatus.FOUND)
                 .body(reservationService.findByUser(user));
     }
 
     @GetMapping(path = "/car/{id}")
-    ResponseEntity<ReservationResponse> findReservedCar(@PathVariable String reservedCar) {
+    ResponseEntity<Reservation> findReservedCar(@PathVariable String reservedCar) throws RecordNotFoundException {
         return ResponseEntity
                 .status(HttpStatus.FOUND)
                 .body(reservationService.findReservedCar(reservedCar));
     }
 
     @GetMapping(path = "/beginning/{id}")
-    ResponseEntity<ReservationResponse> getByBeginningDate(@PathVariable String dateOfBeginning) {
+    ResponseEntity<Reservation> getByBeginningDate(@PathVariable String dateOfBeginning) throws RecordNotFoundException {
         return ResponseEntity
                 .status(HttpStatus.FOUND)
-                .body(reservationService.getByBeginningDate(dateOfBeginning));
+                .body(reservationService.findDateOfBeginning(dateOfBeginning));
     }
 
     @GetMapping(path = "/end/{id}")
-    ResponseEntity<ReservationResponse> getByEndDate(@PathVariable String endDateOfReservation) {
+    ResponseEntity<Reservation> getByEndDate(@PathVariable String endDate) throws RecordNotFoundException{
         return ResponseEntity
                 .status(HttpStatus.FOUND)
-                .body(reservationService.getByEndDate(endDateOfReservation));
+                .body(reservationService.findDateOfEnding(endDate));
     }
 
     @DeleteMapping(path = "/delete")

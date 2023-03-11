@@ -8,11 +8,11 @@ import com.example.car.industry.entity.Users;
 import com.example.car.industry.exception.RecordNotFoundException;
 
 public interface UserService {
-    RegisterResponse register(RegisterRequest registerRequest) throws RecordNotFoundException;
+    RegisterResponse register(RegisterRequest registerRequest) ;
     void updateUser(UserPasswordUpdate user) throws RecordNotFoundException;
     void deleteUser(Long id);
     RegisterResponse getById(Long id) throws RecordNotFoundException;
-    Users findByEmail(String email) throws RecordNotFoundException;
+    Users findByEmail(String email);
 
 
 }

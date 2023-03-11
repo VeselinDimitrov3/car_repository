@@ -44,7 +44,7 @@ public class CarsController {
         carService.updateCar(carsUpdate);
         return ResponseEntity
                 .status(HttpStatus.ACCEPTED)
-                .body(String.format("Car is successfully updated"));
+                .body(String.format("Car is successfully updated", carsUpdate.getId()));
     }
     @DeleteMapping(path = "/delete")
     ResponseEntity<String> deleteCar (@PathVariable Long id) {

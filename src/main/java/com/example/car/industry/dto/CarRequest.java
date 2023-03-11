@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class CarRequest {
     private String brand;
     private String model;
-    private Double pricePerDay;
+    private String pricePerDay;
     private int seats;
 
 
