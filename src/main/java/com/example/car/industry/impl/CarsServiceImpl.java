@@ -5,6 +5,7 @@ import com.example.car.industry.dto.CarRequest;
 import com.example.car.industry.dto.CarResponse;
 import com.example.car.industry.dto.CarsUpdate;
 import com.example.car.industry.entity.Cars;
+import com.example.car.industry.exception.RecordNotFoundException;
 import com.example.car.industry.repository.CarRepository;
 import com.example.car.industry.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -35,10 +36,10 @@ public class CarsServiceImpl implements CarService {
     }
 
     @Override
-    public void updateCar(CarsUpdate carsUpdate) {
+    public void updateCar(CarsUpdate carsUpdate) throws RecordNotFoundException{
         Optional<Cars> car = carRepository.findById(carsUpdate.getId());
         if (car.isEmpty()) {
-            throw new UsernameNotFoundException("User not found or invalid credentials");
+            throw new RecordNotFoundException("User not found or invalid credentials");
         } else {
             car.get().setId(carsUpdate.getId());
             car.get().setModel(carsUpdate.getNewModel());

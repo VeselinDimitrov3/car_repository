@@ -5,6 +5,7 @@ import com.example.car.industry.dto.CarRequest;
 import com.example.car.industry.dto.CarResponse;
 import com.example.car.industry.dto.CarsUpdate;
 import com.example.car.industry.entity.Cars;
+import com.example.car.industry.exception.RecordNotFoundException;
 import com.example.car.industry.service.CarService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +41,7 @@ public class CarsController {
     }
 
     @PutMapping(path = "/update")
-    ResponseEntity<String> updateCar (@RequestBody @Valid CarsUpdate carsUpdate) {
+    ResponseEntity<String> updateCar (@RequestBody @Valid CarsUpdate carsUpdate) throws RecordNotFoundException {
         carService.updateCar(carsUpdate);
         return ResponseEntity
                 .status(HttpStatus.ACCEPTED)
