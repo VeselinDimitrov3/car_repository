@@ -4,7 +4,6 @@ import jakarta.persistence.Column;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
-@Component
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

@@ -2,13 +2,12 @@ package com.example.car.industry.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -24,21 +23,10 @@ public class Cars {
     @Column
     private String model;
     @Column
-    private String pricePerDay;
+    private Double pricePerDay;
     @Column
-    private int seats;
+    private Integer seats;
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Cars cars = (Cars) o;
-        return id != null && Objects.equals(id, cars.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "car")
+    private Set<Reservation> reservationHashSet = new HashSet<>();
 }

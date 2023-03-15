@@ -6,6 +6,7 @@ import com.example.car.industry.dto.CarResponse;
 import com.example.car.industry.dto.CarsUpdate;
 import com.example.car.industry.entity.Cars;
 import com.example.car.industry.exception.RecordNotFoundException;
+import com.example.car.industry.impl.CarsServiceImpl;
 import com.example.car.industry.service.CarService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,40 +20,38 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CarsController {
     @Autowired
-    CarService carService;
+    private CarsServiceImpl carService;
 
-    @PostMapping
-    ResponseEntity<CarResponse> addCar(@RequestBody @Valid CarRequest carRequest) {
+    @Autowired
+    private CarsConvertor carConvertor;
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<CarResponse> getById(@PathVariable Long id) {
+        return ResponseEntity
+                .status(HttpStatus.FOUND)
+                .body(carConvertor.responseCar(carService.findById(id)));
+    }
+
+    @PostMapping(path = "/add")
+    public ResponseEntity<CarResponse> addCar(@RequestBody @Valid CarRequest carRequest) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(carService.addCar(carRequest));
-
-        //        Cars savedCar = carService.addCar(
-//                convertor.carsRequest(carRequest));
-//        return ResponseEntity.status(HttpStatus.CREATED)
-//                .body(convertor.responseCar(savedCar));
     }
 
-    @GetMapping(path = "/{id}")
-    ResponseEntity<CarResponse> getCar(@PathVariable Long id) {
-        return ResponseEntity
-                .status(HttpStatus.FOUND)
-                .body(carService.getCar(id));
-    }
-
-    @PutMapping(path = "/update")
-    ResponseEntity<String> updateCar (@RequestBody @Valid CarsUpdate carsUpdate) throws RecordNotFoundException {
-        carService.updateCar(carsUpdate);
+    @PutMapping(path = "/change")
+    public ResponseEntity<CarResponse> updatePrice(@RequestBody @Valid CarsUpdate carUpdate) {
         return ResponseEntity
                 .status(HttpStatus.ACCEPTED)
-                .body(String.format("Car is successfully updated", carsUpdate.getId()));
+                .body(carService.updatePrice(carUpdate));
     }
-    @DeleteMapping(path = "/delete")
-    ResponseEntity<String> deleteCar (@PathVariable Long id) {
+
+    @DeleteMapping(path = "/{id}/delete")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
         carService.deleteCar(id);
         return ResponseEntity
-                .ok()
-                .body(String.format("Car successfully deleted", id));
+                .status(HttpStatus.OK)
+                .body("Car has been deleted successfully");
     }
 
 

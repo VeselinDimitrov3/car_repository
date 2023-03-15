@@ -1,24 +1,28 @@
 package com.example.car.industry.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.validation.constraints.NotNull;
+import org.springframework.stereotype.Component;
 
+@Component
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class UserPasswordUpdate {
-
     @NotNull
-    private Long id;
-
+    @Email(message = "Invalid email!")
+    private String email;
     @NotNull
     private String password;
-
     @NotNull
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}", message = "Password must contain 8 characters with at least 1 digits, lowercase characters and uppercase characters")
     private String newPassword;
+
 
 }

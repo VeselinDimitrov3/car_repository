@@ -9,8 +9,8 @@ import com.example.car.industry.exception.RecordNotFoundException;
 
 public interface CarService {
     CarResponse addCar(CarRequest carRequest);
-    CarResponse getCar(Long id);
-    void updateCar(CarsUpdate car) throws RecordNotFoundException;
+    Cars findById(Long id);
+    CarResponse updatePrice(CarsUpdate carUpdate);
     void deleteCar(Long id);
 
 }

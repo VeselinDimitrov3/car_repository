@@ -2,31 +2,43 @@ package com.example.car.industry.dto;
 
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
-@Data
+@Component
+@NoArgsConstructor
 @AllArgsConstructor
-@Setter
 @Getter
-@Builder
+@Setter
 public class RegisterRequest {
-    private Long id;
-    @Size(min = 2, message = "User first name should contain more than 2 characters")
+    @NotNull
+    @Size(min = 3, max = 20)
+    @Pattern(regexp = "^[a-zA-Z\\s]{3,20}", message = "Name must be between 3 and 20 characters")
     private String firstName;
-    @Size(min = 3, message = "User last name should contain more than 3 characters")
+
+    @NotNull
+    @Size(min = 3, max = 20)
+    @Pattern(regexp = "^[a-zA-Z\\s]{3,20}", message = "Name must be between 3 and 20 characters")
     private String lastName;
-    @Email(message = "Email should have proper email format.")
-    private String email;
-    @Pattern(regexp = "^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\\d]){1,})(?=(.*[\\W]){1,})(?!.*\\s).{8,}$", message = "" +
-            "At least one upper case English letter\n" +
-            "At least one lower case English letter\n" +
-            "At least one digit\n" +
-            "At least one special character\n" +
-            "Minimum eight in length")
-    private String password;
-    @Size(min = 10, max = 10, message = "Phone number should contain 10 numbers")
-    private String phoneNumber;
+    @NotNull
+    @Size(min = 9, max = 11)
+    @Pattern(regexp = "[0123456789]{9,11}", message = "PassportID must be between 9 and 11 digits")
+    private String passportId;
+
     private String address;
+    @Size(min = 5, max = 20)
+    @Pattern(regexp = "[0123456789]{5,20}", message = "Phone number must be min 5 and max 20 digits")
+    private String phoneNumber;
+
+    @NotNull
+    @Email(message = "Invalid email!")
+    private String email;
+
+    @NotNull
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}", message = "Password must contain 8 characters with at least 1 digits, lowercase characters and uppercase characters")
+    private String password;
+
 }

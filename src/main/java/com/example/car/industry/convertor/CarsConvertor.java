@@ -14,18 +14,16 @@ public class CarsConvertor {
         return Cars.builder()
                 .brand(carRequest.getBrand())
                 .model(carRequest.getModel())
-                .pricePerDay(carRequest.getPricePerDay())
+                .pricePerDay(Double.parseDouble(carRequest.getPricePerDay()))
                 .seats(carRequest.getSeats())
                 .build();
     }
 
     public CarResponse responseCar (Cars cars) {
         return CarResponse.builder()
-                .id(cars.getId())
                 .brand(cars.getBrand())
                 .model(cars.getModel())
-                .pricePerDay(cars.getPricePerDay())
-                .seats(cars.getSeats())
+                .pricePerDay(String.valueOf(cars.getPricePerDay()))
                 .build();
     }
 

@@ -3,34 +3,30 @@ package com.example.car.industry.convertor;
 import com.example.car.industry.dto.RegisterRequest;
 import com.example.car.industry.dto.RegisterResponse;
 import com.example.car.industry.entity.Users;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
+@NoArgsConstructor
 public class UserConvertor {
-    @Autowired
-    BCryptPasswordEncoder passwordEncoder;
-
-    public Users toUser (RegisterRequest registerRequest) {
+    public Users toUser(RegisterRequest userRequest, BCryptPasswordEncoder bCryptPasswordEncoder) {
         return Users.builder()
-                .firstName(registerRequest.getFirstName())
-                .lastName(registerRequest.getLastName())
-                .password(passwordEncoder.encode(registerRequest.getPassword()))
-                .email(registerRequest.getEmail())
-                .phoneNumber(registerRequest.getPhoneNumber())
-                .address(registerRequest.getAddress())
+                .firstName(userRequest.getFirstName())
+                .lastName(userRequest.getLastName())
+                .phoneNumber(userRequest.getPhoneNumber())
+                .address(userRequest.getAddress())
+                .passportId(userRequest.getPassportId())
+                .email(userRequest.getEmail())
+                .password(bCryptPasswordEncoder.encode(userRequest.getPassword()))
                 .build();
     }
 
-    public RegisterResponse toResponse (Users user){
+    public RegisterResponse toResponse(Users user) {
         return RegisterResponse.builder()
-                .id(user.getId())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
-                .address(user.getAddress())
                 .phoneNumber(user.getPhoneNumber())
                 .build();
     }

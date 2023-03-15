@@ -1,16 +1,17 @@
 package com.example.car.industry.dto;
 
 import lombok.*;
+import org.springframework.stereotype.Component;
 
-@Data
-@Builder
-@AllArgsConstructor
+@Component
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 public class CarResponse {
-    private Long id;
     private String brand;
     private String model;
     private String pricePerDay;
-    private int seats;
 
 }

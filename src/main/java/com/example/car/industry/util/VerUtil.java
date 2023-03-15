@@ -1,26 +1,25 @@
 package com.example.car.industry.util;
 
 import com.example.car.industry.entity.Cars;
+import com.example.car.industry.entity.Users;
 import com.example.car.industry.exception.EmailDoublingException;
 import com.example.car.industry.exception.PassportIdDoublingException;
 import com.example.car.industry.exception.PhoneNumberDoublingException;
 import com.example.car.industry.exception.RecordNotFoundException;
-import org.apache.catalina.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public final class Util {
+public final class VerUtil {
 
-    public static boolean login(List<User> users, String email, BCryptPasswordEncoder encoder, String rowPassword) throws RecordNotFoundException {
+    public static boolean login(List<Users> users, String email, BCryptPasswordEncoder encoder, String rowPassword) throws RecordNotFoundException {
         if (isEmailUnique(users, email)) {
             return false;
         } else {
-            User userForAuthentication = null;
-            for (User user : users) {
+            Users userForAuthentication = null;
+            for (Users user : users) {
                 if (user.getEmail().equalsIgnoreCase(email)) {
                     userForAuthentication = user;
                     break;
@@ -30,7 +29,7 @@ public final class Util {
         }
     }
 
-    public static boolean isUserSaveOk(List<User> users, String email, String phoneNumber, String passportId) throws PassportIdDoublingException, PhoneNumberDoublingException, EmailDoublingException {
+    public static boolean isUserSaveOk(List<Users> users, String email, String phoneNumber, String passportId) throws PassportIdDoublingException, PhoneNumberDoublingException, EmailDoublingException {
         if (isEmailUnique(users, email)) {
             if (isPhoneNumberUnique(users, phoneNumber)) {
                 if (isPassportIdUnique(users, passportId)) {
@@ -46,16 +45,16 @@ public final class Util {
         }
     }
 
-    public static boolean isReservationSaveOk(List<User> users, List<Car> cars, String userEmail, Long carID) {
+    public static boolean isReservationSaveOk(List<Users> users, List<Cars> cars, String userEmail, Long carID) {
         boolean isUserOk = false;
         boolean isCarOk = false;
-        for (User user : users) {
+        for (Users user : users) {
             if (user.getEmail().equals(userEmail)) {
                 isUserOk = true;
                 break;
             }
         }
-        for (Car car : cars) {
+        for (Cars car : cars) {
             if (car.getId().equals(carID)) {
                 isCarOk = true;
                 break;
@@ -64,8 +63,8 @@ public final class Util {
         return isUserOk && isCarOk;
     }
 
-    public static boolean isEmailUnique(List<User> users, String email) {
-        for (User user : users) {
+    public static boolean isEmailUnique(List<Users> users, String email) {
+        for (Users user : users) {
             if (user.getEmail().equalsIgnoreCase(email)) {
                 return false;
             }
@@ -73,8 +72,8 @@ public final class Util {
         return true;
     }
 
-    public static boolean isPassportIdUnique(List<User> users, String passportId) {
-        for (User user : users) {
+    public static boolean isPassportIdUnique(List<Users> users, String passportId) {
+        for (Users user : users) {
             if (user.getPassportId().equals(passportId)) {
                 return false;
             }
@@ -82,8 +81,8 @@ public final class Util {
         return true;
     }
 
-    public static boolean isPhoneNumberUnique(List<User> users, String phoneNumber) {
-        for (User user : users) {
+    public static boolean isPhoneNumberUnique(List<Users> users, String phoneNumber) {
+        for (Users user : users) {
             if (user.getPhoneNumber().equals(phoneNumber)) {
                 return false;
             }
