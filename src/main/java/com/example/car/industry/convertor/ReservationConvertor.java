@@ -51,6 +51,7 @@ public class ReservationConvertor {
                         .brand(reservation.getCar().getBrand())
                         .model(reservation.getCar().getModel())
                         .pricePerDay(String.valueOf(reservation.getCar().getPricePerDay()))
+                        .seats(reservation.getCar().getSeats())
                         .build())
                 .reservationDate(reservation.getStartingDate().toString())
                 .returnDate(reservation.getEndDate().toString())

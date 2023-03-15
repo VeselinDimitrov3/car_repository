@@ -13,5 +13,6 @@ public class CarResponse {
     private String brand;
     private String model;
     private String pricePerDay;
+    private Integer seats;
 
 }

@@ -24,6 +24,7 @@ public class CarsConvertor {
                 .brand(cars.getBrand())
                 .model(cars.getModel())
                 .pricePerDay(String.valueOf(cars.getPricePerDay()))
+                .seats(cars.getSeats())
                 .build();
     }
 
