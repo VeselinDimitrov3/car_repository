@@ -29,7 +29,7 @@ public class UserController {
                 .body(userConvertor.toResponse(userService.findById(id)));
     }
 
-    @GetMapping(path = "/{email}")
+    @GetMapping(path = "/email/{email}")
     public ResponseEntity<RegisterResponse> getByEmail(@RequestParam String email) {
         return ResponseEntity
                 .status(HttpStatus.FOUND)
