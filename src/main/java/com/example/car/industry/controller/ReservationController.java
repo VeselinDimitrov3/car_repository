@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "/reservation")
+@RequestMapping(path = "/reservations")
 public class ReservationController {
     @Autowired
     private ReservationServiceImpl reservationService;

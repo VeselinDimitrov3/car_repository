@@ -4,7 +4,7 @@ import com.example.car.industry.dto.CarRequest;
 import com.example.car.industry.dto.CarResponse;
 import com.example.car.industry.dto.CarsUpdate;
 import com.example.car.industry.entity.Cars;
-import com.example.car.industry.exception.RecordNotFoundException;
+
 
 
 public interface CarService {

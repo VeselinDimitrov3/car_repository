@@ -1,6 +1,5 @@
 package com.example.car.industry.dto;
 
-import jakarta.persistence.Column;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Builder
 @Getter
 @Setter
+@Component
 public class CarRequest {
     private String brand;
     private String model;

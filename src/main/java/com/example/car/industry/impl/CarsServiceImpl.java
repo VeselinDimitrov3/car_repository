@@ -6,17 +6,12 @@ import com.example.car.industry.dto.CarResponse;
 import com.example.car.industry.dto.CarsUpdate;
 import com.example.car.industry.entity.Cars;
 import com.example.car.industry.exception.CarNotFoundException;
-import com.example.car.industry.exception.RecordNotFoundException;
 import com.example.car.industry.repository.CarRepository;
 import com.example.car.industry.service.CarService;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 
 @Service
